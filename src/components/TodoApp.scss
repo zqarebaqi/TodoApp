@@ -1,0 +1,81 @@
+$primary-color: #424874;
+$secoundry-color: #a6b1e1;
+$white-color: #f4eeff;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.header {
+  height: 10vh;
+  background-color: $primary-color;
+  border-radius: 5px;
+  margin-top: 5px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  span {
+    color: $white-color;
+    font-size: 20px;
+  }
+}
+
+///////////////
+
+.todo-input-wrapper {
+  margin: 30px 0;
+  display: flex;
+  justify-content: space-between;
+  .todo-input {
+    width: 40vw;
+    background-color: $white-color;
+    padding: 10px 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+  }
+  .todo-button {
+    border: none;
+    border-radius: 5px;
+    background-color: $primary-color;
+    padding: 15px 50px;
+    color: $white-color;
+    font-size: 15px;
+    margin-left: 10px;
+  }
+}
+
+///////////
+
+.todo-list-wrapper {
+  width: 50vw;
+  margin: 0 auto;
+  ul {
+    list-style-type: none;
+  }
+  .list-item {
+    font-size: 18px;
+    margin: 10px 0;
+    border: 1px solid $primary-color;
+    border-radius: 2px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    div {
+      span {
+        padding: 0 10px;
+      }
+    }
+  }
+}
+
+.done {
+  text-decoration: line-through;
+}
+
+.del-button {
+  margin: 0 10px;
+}
