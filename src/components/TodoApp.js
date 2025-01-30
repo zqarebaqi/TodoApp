@@ -74,9 +74,9 @@ export default function TodoApp() {
             <TodoItem
               key={todo.id}
               todo={todo}
-              onDelete={handleDelete}
-              onToggle={handleToggle}
-              onEdit={handleEdit}
+              onDelete={()=>handleDelete(todo.id)}
+              onToggle={()=>handleToggle(todo.id)}
+              onEdit={()=>handleEdit(todo)}
             />
           ))}
         </ul>
