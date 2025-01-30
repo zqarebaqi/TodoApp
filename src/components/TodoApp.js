@@ -5,48 +5,50 @@ import TodoItem from "./TodoItem";
 export default function TodoApp() {
   const [inputValue, setInputValue] = useState("");
   const [todos, setTodos] = useState([
-    { text: "clean house", isDone: false },
-    { text: "go to shopping", isDone: false },
+    { text: "clean house", isDone: false, id: 1 },
+    { text: "go to shopping", isDone: false, id: 2 },
   ]);
 
-  const [edit, setEdit] = useState("");
+  const [edit, setEdit] = useState(null);
 
   function handleInputChange(e) {
     setInputValue(e.target.value);
   }
 
   function handleAdd() {
-    if (edit !== null) {
+    if (edit) {
       setTodos((prev) =>
-        prev.map((item, index) =>
-          index === edit ? { ...item, text: inputValue } : item
+        prev.map((item) =>
+          item.id === edit ? { ...item, text: inputValue } : item
         )
       );
       setEdit(null);
-    } else if (inputValue !== "") {
-      setTodos((prev) => [...prev, { text: inputValue, isDone: false }]);
+      setInputValue("");
+    } else if (inputValue) {
+      setTodos((prev) => [
+        ...prev,
+        { text: inputValue, isDone: false, id: new Date().getTime() },
+      ]);
       setInputValue("");
     }
   }
 
-  // function handleDelete(id) {
-  //   setTodos((prev) => [prev.filter((item) => item.id !== id)]);
-  // }
-  function handleDelete(index) {
-    setTodos((prev) => prev.filter((_, i) => i !== index));
+  function handleDelete(id) {
+    setTodos((prev) => prev.filter((item) => item.id !== id));
   }
 
-  function handleToggle(index) {
+  function handleToggle(id) {
     setTodos((prev) =>
-      prev.map((item, i) =>
-        i === index ? { ...item, isDone: !item.isDone } : item
+      prev.map((item) =>
+        item.id === id ? { ...item, isDone: !item.isDone } : item
       )
     );
   }
 
-  function handleEdit(index, todo) {
+  function handleEdit(todo) {
+    console.log(todo);
     setInputValue(todo.text);
-    setEdit(index);
+    setEdit(todo.id);
   }
 
   return (
@@ -68,10 +70,9 @@ export default function TodoApp() {
       </div>
       <div className="todo-list-wrapper">
         <ul>
-          {todos.map((todo, index) => (
+          {todos.map((todo) => (
             <TodoItem
-              key={index}
-              index={index}
+              key={todo.id}
               todo={todo}
               onDelete={handleDelete}
               onToggle={handleToggle}
